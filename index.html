@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traffic Jam Physics Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="simulation-stage" aria-label="Traffic jam physics simulation">
+        <canvas id="simulation-canvas"></canvas>
+
+        <section class="hud top-hud" aria-label="Simulation summary">
+          <div class="title-block">
+            <span class="kicker">Closed-loop traffic flow</span>
+            <h1>Jam Wave Physics Lab</h1>
+          </div>
+          <div class="metrics-grid" aria-label="Live metrics">
+            <div class="metric">
+              <span>Average Speed</span>
+              <strong id="metric-speed">0 km/h</strong>
+            </div>
+            <div class="metric">
+              <span>Flow</span>
+              <strong id="metric-flow">0 veh/h</strong>
+            </div>
+            <div class="metric">
+              <span>Density</span>
+              <strong id="metric-density">0 veh/km</strong>
+            </div>
+            <div class="metric">
+              <span>Jam Index</span>
+              <strong id="metric-jam">0%</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="hud history-panel" aria-label="Speed history">
+          <div class="history-header">
+            <span>Speed Field</span>
+            <span id="metric-time">00:00</span>
+          </div>
+          <canvas id="history-canvas"></canvas>
+        </section>
+
+        <section class="hud action-bar" aria-label="Simulation actions">
+          <button id="toggle-run" type="button">Pause</button>
+          <button id="jam-pulse" type="button">Trigger Jam Pulse</button>
+          <button id="reset-sim" type="button">Reset Flow</button>
+        </section>
+      </main>
+
+      <aside class="control-panel" aria-label="Simulation parameters">
+        <div class="panel-heading">
+          <span class="kicker">Parameters</span>
+          <h2>Driver physics</h2>
+        </div>
+
+        <div class="control-stack">
+          <label class="range-control">
+            <span>
+              <span>Vehicles</span>
+              <output id="vehicles-value">64</output>
+            </span>
+            <input id="vehicles" type="range" min="16" max="150" step="1" value="64" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Road Length</span>
+              <output id="roadLength-value">1.20 km</output>
+            </span>
+            <input id="roadLength" type="range" min="0.55" max="2.50" step="0.05" value="1.20" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Target Speed</span>
+              <output id="targetSpeed-value">88 km/h</output>
+            </span>
+            <input id="targetSpeed" type="range" min="25" max="130" step="1" value="88" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Reaction Time</span>
+              <output id="reactionTime-value">1.10 s</output>
+            </span>
+            <input id="reactionTime" type="range" min="0.35" max="2.60" step="0.05" value="1.10" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Acceleration</span>
+              <output id="acceleration-value">1.55 m/s2</output>
+            </span>
+            <input id="acceleration" type="range" min="0.35" max="3.20" step="0.05" value="1.55" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Comfort Braking</span>
+              <output id="braking-value">2.15 m/s2</output>
+            </span>
+            <input id="braking" type="range" min="0.80" max="5.00" step="0.05" value="2.15" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Minimum Gap</span>
+              <output id="minGap-value">8.0 m</output>
+            </span>
+            <input id="minGap" type="range" min="2" max="18" step="0.5" value="8" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Driver Variation</span>
+              <output id="variation-value">18%</output>
+            </span>
+            <input id="variation" type="range" min="0" max="45" step="1" value="18" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Disturbance</span>
+              <output id="disturbance-value">30%</output>
+            </span>
+            <input id="disturbance" type="range" min="0" max="100" step="1" value="30" />
+          </label>
+
+          <label class="range-control">
+            <span>
+              <span>Simulation Speed</span>
+              <output id="timeScale-value">1.20x</output>
+            </span>
+            <input id="timeScale" type="range" min="0.20" max="4.00" step="0.05" value="1.20" />
+          </label>
+        </div>
+
+        <div class="toggle-grid" aria-label="Rendering options">
+          <label class="toggle">
+            <input id="showTrails" type="checkbox" checked />
+            <span>Velocity Trails</span>
+          </label>
+          <label class="toggle">
+            <input id="showHeat" type="checkbox" checked />
+            <span>Congestion Heat</span>
+          </label>
+          <label class="toggle">
+            <input id="showGhosts" type="checkbox" checked />
+            <span>Wave Echoes</span>
+          </label>
+          <label class="toggle">
+            <input id="showSensors" type="checkbox" checked />
+            <span>Sensor Gates</span>
+          </label>
+        </div>
+
+        <p class="model-note">
+          The cars use an intelligent-driver car-following model. Increase density,
+          reaction time, or disturbance to make phantom traffic jams appear.
+        </p>
+      </aside>
+    </div>
+
+    <script src="simulation.js"></script>
+  </body>
+</html>
