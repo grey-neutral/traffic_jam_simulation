@@ -14,6 +14,10 @@
   <img alt="No Build Step" src="https://img.shields.io/badge/No_Build-Step-6bf2a4?style=for-the-badge&labelColor=111111">
 </p>
 
+<p align="center">
+  <a href="https://grey-neutral.github.io/traffic_jam_simulation/"><strong>Test the live simulation</strong></a>
+</p>
+
 ## What It Does
 
 Traffic jams do not always need crashes, cones, or bad roads. This lab shows how a small braking ripple can travel backward through a closed-loop road and become a stop-and-go wave.
